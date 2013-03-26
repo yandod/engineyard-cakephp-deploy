@@ -10,9 +10,9 @@ sudo "echo 'date.timezone = Asia/Tokyo' > /etc/php/cli-php5.3/ext-active/timezon
 sudo "echo 'date.timezone = Asia/Tokyo' > /etc/php/fpm-php5.3/ext-active/timezone.ini"
 
 # set allow_url_fopen = On
-sudo "echo 'allow_url_fopen = On' > /etc/php/cgi-php5.3/ext-active/timezone.ini"
-sudo "echo 'allow_url_fopen = On' > /etc/php/cli-php5.3/ext-active/timezone.ini"
-sudo "echo 'allow_url_fopen = On' > /etc/php/fpm-php5.3/ext-active/timezone.ini"
+sudo "echo 'allow_url_fopen = On' > /etc/php/cgi-php5.3/ext-active/allow_url.ini"
+sudo "echo 'allow_url_fopen = On' > /etc/php/cli-php5.3/ext-active/allow_url.ini"
+sudo "echo 'allow_url_fopen = On' > /etc/php/fpm-php5.3/ext-active/allow_url.ini"
 
 # kick composer install
 #run "curl -s https://getcomposer.org/installer | php -d allow_url_fopen=on"
