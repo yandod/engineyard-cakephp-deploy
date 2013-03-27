@@ -25,7 +25,7 @@ sudo "echo 'allow_url_fopen = On' > /etc/php/fpm-php5.4/ext-active/allow_url.ini
 #run "php -d allow_url_fopen=on composer.phar install"
 
 # change nginx document root for CakePHP
-run 'sed  -e \'s/\/data\/' + app  + '\/current;/\/data\/' + app  + '\/current\/app\/webroot;/\' /etc/nginx/servers/' + app  + '.conf > /etc/nginx/servers/' + app  + '.conf.tmp'
+run 'sed  -e \'s/\/data\/' + app  + '\/current/;/\/data\/' + app  + '\/current\/app\/webroot;/\' /etc/nginx/servers/' + app  + '.conf > /etc/nginx/servers/' + app  + '.conf.tmp'
 
 # TODO: this piece has to be injected somehow.
 # if (!-e $request_filename) {
