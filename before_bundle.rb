@@ -3,17 +3,31 @@ if !Dir.exist?(shared_path + "/app/Config") then
   run "cp #{release_path}/app/Config/core.php #{shared_path}/app/Config/core.php"
   run "echo \"<?php
   class DATABASE_CONFIG {
-  	var \$default = array(
+  	var \\\$default = array(
   		'datasource' => 'Database/Mysql',
   		'persistent' => false,
-  		'host' => \$_SERVER[\"DB_HOST\"],
-  		'login' => \$_SERVER[\"DB_USER\"],
-  		'password' => \$_SERVER[\"DB_PASS\"],
-  		'database' => \$_SERVER[\"DB_NAME\"],
+  		'host' => '',
+  		'login' => '',
+  		'password' => '',
+  		'database' => '',
   		'prefix' => '',
   		'port' => '',
   		'encoding' => 'utf8',
   	);
+  	public function __construct()
+  	{
+  	  \\\$this->default = array(
+    		'datasource' => 'Database/Mysql',
+    		'persistent' => false,
+    		'host' => \\\$_SERVER[\"DB_HOST\"],
+    		'login' => \\\$_SERVER[\"DB_USER\"],
+    		'password' => \\\$_SERVER[\"DB_PASS\"],
+    		'database' => \\\$_SERVER[\"DB_NAME\"],
+    		'prefix' => '',
+    		'port' => '',
+    		'encoding' => 'utf8',
+    	);
+  	}
   }\" > #{shared_path}/app/Config/database.php"
   run "mkdir -p #{shared_path}/app/files/"
   run "mkdir -p #{shared_path}/app/Plugin/"
