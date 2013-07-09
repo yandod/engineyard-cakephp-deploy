@@ -37,7 +37,7 @@ end
 # prepare shared files and directories
 run "rm #{release_path}/app/Config/core.php && ln -s #{shared_path}/app/Config/core.php #{release_path}/app/Config/core.php"
 run "ln -s #{shared_path}/app/Config/database.php #{release_path}/app/Config/database.php"
-run "ln -s #{shared_path}/app/Plugin #{release_path}/app/Plugin"
+run "rm -r #{release_path}/app/Plugin && ln -s #{shared_path}/app/Plugin #{release_path}/app/Plugin"
 run "ln -s #{shared_path}/app/files #{release_path}/app/files"
 
 # set timezone in php.ini
