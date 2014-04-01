@@ -66,5 +66,4 @@ sudo "echo 'allow_url_fopen = On' > /etc/php/fpm-php5.4/ext-active/allow_url.ini
 # TODO: this piece has to be injected somehow.
 # @proxy;\n
 # @proxy ; if (!-e $request_filename) { rewrite ^(.+)$  /index.php?url=$1 last; break; }
-
 # run "cp /etc/nginx/servers/" + app  + ".conf.tmp /etc/nginx/servers/" + app  + ".conf"
