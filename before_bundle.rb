@@ -1,6 +1,6 @@
-if !Dir.exist?(shared_path + "/app/Config") then
-  run "mkdir -p #{shared_path}/app/Config/"
-  run "cp #{release_path}/app/Config/core.php #{shared_path}/app/Config/core.php"
+if !Dir.exist?(config.shared_path + "/app/Config") then
+  run "mkdir -p #{config.shared_path}/app/Config/"
+  run "cp #{config.release_path}/app/Config/core.php #{config.shared_path}/app/Config/core.php"
   run "echo \"<?php
   class DATABASE_CONFIG {
   	var \\\$default = array(
@@ -28,17 +28,17 @@ if !Dir.exist?(shared_path + "/app/Config") then
     		'encoding' => 'utf8',
     	);
   	}
-  }\" > #{shared_path}/app/Config/database.php"
-  run "mkdir -p #{shared_path}/app/files/"
-  run "mkdir -p #{shared_path}/app/Plugin/"
-  run "mysql #{app} < #{release_path}/app/Config/sql/mysql.sql"
+  }\" > #{config.shared_path}/app/Config/database.php"
+  run "mkdir -p #{config.shared_path}/app/files/"
+  run "mkdir -p #{config.shared_path}/app/Plugin/"
+  run "mysql #{app} < #{config.release_path}/app/Config/sql/mysql.sql"
 end
 
 # prepare shared files and directories
-run "rm #{release_path}/app/Config/core.php && ln -s #{shared_path}/app/Config/core.php #{release_path}/app/Config/core.php"
-run "ln -s #{shared_path}/app/Config/database.php #{release_path}/app/Config/database.php"
-run "ln -s #{shared_path}/app/Plugin #{release_path}/app/Plugin"
-run "ln -s #{shared_path}/app/files #{release_path}/app/files"
+run "rm #{config.release_path}/app/Config/core.php && ln -s #{config.shared_path}/app/Config/core.php #{config.release_path}/app/Config/core.php"
+run "ln -s #{config.shared_path}/app/Config/database.php #{config.release_path}/app/Config/database.php"
+run "rm -r #{config.release_path}/app/Plugin && ln -s #{config.shared_path}/app/Plugin #{config.release_path}/app/Plugin"
+run "ln -s #{config.shared_path}/app/files #{config.release_path}/app/files"
 
 # set timezone in php.ini
 sudo "echo 'date.timezone = Asia/Tokyo' > /etc/php/cgi-php5.4/ext-active/timezone.ini"
@@ -66,5 +66,5 @@ sudo "echo 'allow_url_fopen = On' > /etc/php/fpm-php5.4/ext-active/allow_url.ini
 # TODO: this piece has to be injected somehow.
 # @proxy;\n
 # @proxy ; if (!-e $request_filename) { rewrite ^(.+)$  /index.php?url=$1 last; break; }
-            
+
 # run "cp /etc/nginx/servers/" + app  + ".conf.tmp /etc/nginx/servers/" + app  + ".conf"
